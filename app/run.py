@@ -10,10 +10,13 @@ from nltk import pos_tag, word_tokenize
 from flask import Flask
 from flask import render_template, request, jsonify
 from plotly.graph_objs import Bar
-from sklearn.externals import joblib
+#from sklearn.externals import joblib
+import joblib
 from sqlalchemy import create_engine
 
 from sklearn.base import BaseEstimator, TransformerMixin
+
+#References the pkl file that the train_classier makes
 
 app = Flask(__name__)
 
