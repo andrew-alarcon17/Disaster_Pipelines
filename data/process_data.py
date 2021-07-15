@@ -73,9 +73,12 @@ def save_data(df, database_filename):
 
 
 def main():
+    print(sys.argv) #sys.argv will always count the name of the file as the first element.
     if len(sys.argv) == 4:
-
-        messages_filepath, categories_filepath, database_filepath = sys.argv[1:]
+        
+        #passing in the location of the file when we run this file.
+        messages_filepath, categories_filepath, database_filepath = sys.argv[1:] 
+        #^skips index 0, ie the first element which is the name of this python file
 
         print('Loading data...\n    MESSAGES: {}\n    CATEGORIES: {}'
               .format(messages_filepath, categories_filepath))
