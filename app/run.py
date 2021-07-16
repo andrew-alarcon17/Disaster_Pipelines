@@ -2,6 +2,12 @@ import json
 import plotly
 import pandas as pd
 import nltk
+import sys
+import os
+
+from plotly.subplots import make_subplots
+import plotly.graph_objects as goplot
+import plotly.express as px
 
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize, sent_tokenize
@@ -78,36 +84,74 @@ def index():
     # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
-    
+
+    Y = df.iloc[:,4:]
+
+    category_counts = list(Y.sum(axis = 0).values)
+    category_names = list(Y.columns)
+    category_boolean = (df.iloc[:,4:] != 0).sum().values
+
+    fig = px.pie(df, values=genre_counts, names=genre_names, title='Message Genre Distribution')
+    #fig2 = px.bar(df, x=category_names, y=category_counts, title='Category Distribution' )
+
+    #Graph 3
+    df['message_length'] = df['message'].apply(len)
+    genre_mean = df.groupby('genre', as_index=False)['message_length'].mean()
+
+
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
     graphs = [
+        #Graph 1 - Average message length by genre
         {
-            'data': [
+            'data':[
                 Bar(
-                    x=genre_names,
-                    y=genre_counts
+                    x=genre_mean.genre,
+                    y=genre_mean.message_length
                 )
             ],
 
             'layout': {
-                'title': 'Distribution of Message Genres',
+                'title': 'Average Message Length by Genre',
                 'yaxis': {
-                    'title': "Count"
+                    'title': 'Average Message Length'
                 },
                 'xaxis': {
-                    'title': "Genre"
+                    'title': 'Genre'
                 }
             }
-        }
+        },
+        #Graph 2
+        {
+            'data':[
+                Bar(
+                    x=category_names,
+                    y=category_counts
+                )
+            ],
+            'layout': {
+                'title': 'Distribution of Categories',
+                'yaxis': {
+                    'title': 'Count of Categories'
+                },
+                'xaxis': {
+                    'title': 'Category Name'
+                }
+            }
+        },
+        #Graph 3
+        fig
+
     ]
-    
+
     # encode plotly graphs in JSON
     ids = ["graph-{}".format(i) for i, _ in enumerate(graphs)]
     graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
     
     # render web page with plotly graphs
     return render_template('master.html', ids=ids, graphJSON=graphJSON)
+
+    
 
 
 # web page that handles user query and displays model results
@@ -127,9 +171,19 @@ def go():
         classification_result=classification_results
     )
 
-
 def main():
-    app.run(host='0.0.0.0', port=3001, debug=True)
+    '''
+    as the main function this runs whenever the file is called
+    
+    it sets the port and then runs the app through the desired port
+    '''
+    
+    if len(sys.argv) == 4:
+        app.run(host='0.0.0.0', port=int(sys.argv[1]), debug=True)
+    else:
+        port = int(os.environ.get('PORT', 5000))
+        app.run(host='0.0.0.0', port=port)
+  
 
 
 if __name__ == '__main__':
