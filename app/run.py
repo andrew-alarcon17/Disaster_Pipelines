@@ -178,7 +178,8 @@ def main():
     it sets the port and then runs the app through the desired port
     '''
     
-    if len(sys.argv) == 4:
+    if len(sys.argv) == 2:
+        #for some reason, changing this to 4 messes up graph 2
         app.run(host='0.0.0.0', port=int(sys.argv[1]), debug=True)
     else:
         port = int(os.environ.get('PORT', 5000))
