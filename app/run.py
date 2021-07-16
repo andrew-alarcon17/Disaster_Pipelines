@@ -1,7 +1,7 @@
 import json
 import plotly
 import pandas as pd
-import nltk
+#import nltk
 import sys
 import os
 
@@ -21,6 +21,11 @@ import joblib
 from sqlalchemy import create_engine
 
 from sklearn.base import BaseEstimator, TransformerMixin
+
+import nltk
+nltk.download('punkt')
+nltk.download('wordnet')
+nltk.download('averaged_perceptron_tagger')
 
 #References the pkl file that the train_classier makes
 
@@ -162,7 +167,8 @@ def go():
 
     # use model to predict classification for query
     classification_labels = model.predict([query])[0]
-    classification_results = dict(zip(df.columns[4:], classification_labels))
+    classification_results = dict(zip(df.columns[5:], classification_labels))
+    #^changed from 4 to 5
 
     # This will render the go.html Please see that file. 
     return render_template(
@@ -172,20 +178,12 @@ def go():
     )
 
 def main():
-    '''
-    as the main function this runs whenever the file is called
-    
-    it sets the port and then runs the app through the desired port
-    '''
     
     if len(sys.argv) == 2:
-        #for some reason, changing this to 4 messes up graph 2
         app.run(host='0.0.0.0', port=int(sys.argv[1]), debug=True)
     else:
         port = int(os.environ.get('PORT', 5000))
         app.run(host='0.0.0.0', port=port)
   
-
-
 if __name__ == '__main__':
     main()
