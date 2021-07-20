@@ -38,6 +38,15 @@ Contains the train_classifer.py file which builds, trains, evaluates, and saves 
 
 
 ### Acknowledgements
+The data used in this project was provided by Figure Eight.
 
-### Screenshots of webpage
+### Webpage Preview
+
+<img src="https://github.com/andrew-alarcon17/Disaster_Pipelines/blob/main/Images/Ave_Message_Length.png" width="500">
+
+<img src="https://github.com/andrew-alarcon17/Disaster_Pipelines/blob/main/Images/Categories_Count.png" width="500">
+
+<img src="https://github.com/andrew-alarcon17/Disaster_Pipelines/blob/main/Images/Message_Genres.png" width="500">
+
+
 
