@@ -1,7 +1,6 @@
 import json
 import plotly
 import pandas as pd
-#import nltk
 import sys
 import os
 
@@ -33,7 +32,8 @@ app = Flask(__name__)
 
 class StartingVerbExtractor(BaseEstimator, TransformerMixin):
     """
-    
+    Takes in the starting verb of a sentence to be used as a feature
+    for the classifier.
     """
     def starting_verb(self, text):
         # tokenize by sentences
@@ -71,9 +71,7 @@ def tokenize(text):
     return clean_tokens
 
 # load data
-#engine = create_engine('sqlite:///../data/YourDatabaseName.db')
 engine = create_engine('sqlite:///../data/DisasterResponse.db')
-#df = pd.read_sql_table('YourTableName', engine)
 df = pd.read_sql_table('df', engine)
 
 # load model
@@ -126,7 +124,7 @@ def index():
                 }
             }
         },
-        #Graph 2
+        #Graph 2 - Counts of the categories
         {
             'data':[
                 Bar(
@@ -144,7 +142,7 @@ def index():
                 }
             }
         },
-        #Graph 3
+        #Graph 3 - Message length by genre
         fig
 
     ]
