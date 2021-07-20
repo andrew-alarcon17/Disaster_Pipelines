@@ -38,9 +38,14 @@ Contains the train_classifer.py file which builds, trains, evaluates, and saves 
 
 <img src="https://github.com/andrew-alarcon17/Disaster_Pipelines/blob/main/Images/Ave_Message_Length.png" width="500">
 
-<img src="https://github.com/andrew-alarcon17/Disaster_Pipelines/blob/main/Images/Categories_Count.png" width="500">
-
 <img src="https://github.com/andrew-alarcon17/Disaster_Pipelines/blob/main/Images/Message_Genres.png" width="500">
+
+
+Below is a sample search for classifying a message and it's result:
+
+<img src="https://github.com/andrew-alarcon17/Disaster_Pipelines/blob/main/Images/Sample.png" width="500">
+
+<img src="https://github.com/andrew-alarcon17/Disaster_Pipelines/blob/main/Images/Results.png" width="500">
 
 
 ### Acknowledgements
