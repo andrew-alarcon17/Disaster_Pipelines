@@ -30,7 +30,6 @@ nltk.download('punkt')
 nltk.download('wordnet')
 nltk.download('averaged_perceptron_tagger')
 
-#https://knowledge.udacity.com/questions/526629
 
 def load_data(database_filepath):
     """
@@ -44,16 +43,9 @@ def load_data(database_filepath):
         y_labels: names of the columns in the Y DataFrame
         
     """
-    #engine = create_engine('sqlite:///InsertDatabaseName.db')
-    #df = pd.read_sql_table("InsertDatabaseName",engine)
-    
-    #engine = create_engine('sqlite:///' + database_filepath)
-    #table_name = os.path.basename(database_filepath).replace(".db","") + "_table"
-    #df = pd.read_sql_table(table_name, engine)
     
     engine = create_engine('sqlite:///' + (database_filepath))
     df = pd.read_sql_table('df', engine)
-    
     
     df['related'] = df['related'].replace(2, 1)
     df = df.drop(['child_alone'], axis=1)
@@ -67,7 +59,7 @@ def load_data(database_filepath):
 
 def tokenize(text):
     """
-    tokenization function to process the text data
+    Tokenization function to process the text data
     
     Takes In:
         text: Text message that needs to be tokenized
@@ -81,7 +73,7 @@ def tokenize(text):
     #remove punctuation from the text
     text = text.replace(r'[^\w\s]','')
     
-    #stop_words = set(stopwords.words('english'))
+    #stop_words_ = set(stopwords.words('english'))
     
     #tokenize text
     tokens = word_tokenize(text)
@@ -102,7 +94,8 @@ def tokenize(text):
     
 class StartingVerbExtractor(BaseEstimator, TransformerMixin):
     """
-    
+    Takes in the starting verb of a sentence to be used as a feature
+    for the classifier.
     """
     def starting_verb(self, text):
         # tokenize by sentences
@@ -138,9 +131,17 @@ def build_model():
     
     Output:
         ML pipeline that classifies text messages
-        
     """
-    
+
+    parameters = [
+    {
+        'clf__estimator__n_estimators': [10, 20],
+        'vect__max_df': (0.5, 1.0),
+        #'clf__estimator__criterion': ('gini', 'entropy'),
+        #'clf__estimator__min_samples_split': (2, 3)
+    }
+]
+    """
     pipeline = Pipeline([
         
             ('features', FeatureUnion([
@@ -155,7 +156,16 @@ def build_model():
         
             ('classifier', MultiOutputClassifier(AdaBoostClassifier()))
     ])
-    return pipeline
+    This pipeline would be used without the implementation of GridSearch
+    """
+    pipeline = Pipeline([
+
+        ('vect', CountVectorizer(tokenizer=tokenize)),
+        ('tfidf', TfidfTransformer()),
+        ('clf', MultiOutputClassifier(RandomForestClassifier()))
+    ])
+    cv = GridSearchCV(pipeline, param_grid=parameters, scoring='f1_micro', n_jobs=4, verbose=2)
+    return cv
     
 
 
