@@ -23,14 +23,19 @@ Contains the train_classifer.py file which builds, trains, evaluates, and saves 
 ### Project Structure
 *Note that the jupyter files in the data and model folders are included to better understand the direction of the ETL and ML sections of this project.*
 
-### ETL Pipeline Description
+### Instructions for Running the Project Locally
+1. Run the following commands in the project's root directory to set up your database and model.
 
+    - To run ETL pipeline that cleans data and stores in database
+        `python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db`
+    - To run ML pipeline that trains classifier and saves
+        `python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl`
 
-### ML Pipeline Description 
+2. Run the following command in the app's directory to run your web app.
+    `python run.py`
 
-### Add original ReadMe from project directory here
+3. Go to http://0.0.0.0:3001/
 
-### Description of both Jupyter Notebooks
 
 ### Acknowledgements
 
