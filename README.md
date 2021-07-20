@@ -2,12 +2,10 @@
 
 ## You can view the webpage version of this project via this [Heroku Link](https://disaster-pipeline-app17.herokuapp.com/)
 
-### Motivation
+### Motivation and Data Description
 
 Messages involving disasters were used in a machine learning pipeline in order to classify whether they involved occurences such as storms, hurricanes, transportation, etc. On the web app, a message can be inputed in the navigation bar in order to classify which of the 36 categories the message falls under.
 
-### Data Description
-Disaster related messages were provided by Figure Eight and Udacity.
 
 ### Folder Descriptions
 
@@ -36,9 +34,6 @@ Contains the train_classifer.py file which builds, trains, evaluates, and saves 
 3. Go to http://0.0.0.0:3001/
 
 
-### Acknowledgements
-The data used in this project was provided by Figure Eight.
-
 ### Webpage Preview
 
 <img src="https://github.com/andrew-alarcon17/Disaster_Pipelines/blob/main/Images/Ave_Message_Length.png" width="500">
@@ -46,6 +41,11 @@ The data used in this project was provided by Figure Eight.
 <img src="https://github.com/andrew-alarcon17/Disaster_Pipelines/blob/main/Images/Categories_Count.png" width="500">
 
 <img src="https://github.com/andrew-alarcon17/Disaster_Pipelines/blob/main/Images/Message_Genres.png" width="500">
+
+
+### Acknowledgements
+The data used in this project was provided by Figure Eight.
+
 
 
 
