@@ -9,7 +9,7 @@ Messages involving disasters were used in a machine learning pipeline in order t
 ### Data Description
 Disaster related messages were provided by Figure Eight and Udacity.
 
-### Folders:
+### Folder Descriptions
 
 #### App Folder
 Contains the html templates and run.py files to display correctly for the heroku web app.
@@ -20,7 +20,6 @@ Contains the csv files where the data is stored. The process.py file cleans up a
 #### Models Folder
 Contains the train_classifer.py file which builds, trains, evaluates, and saves the model to a pkl file.
 
-### Project Structure
 *Note that the jupyter files in the data and model folders are included to better understand the direction of the ETL and ML sections of this project.*
 
 ### Instructions for Running the Project Locally
