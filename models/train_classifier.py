@@ -47,7 +47,9 @@ def load_data(database_filepath):
     engine = create_engine('sqlite:///' + (database_filepath))
     df = pd.read_sql_table('df', engine)
     
-    df['related'] = df['related'].replace(2, 1)
+    #df['related'] = df['related'].replace(2, 1)
+    df['related'] = df['related'].astype('str').str.replace('2', '1')
+    df['related'] = df['related'].astype('int')
     df = df.drop(['child_alone'], axis=1)
     
     X = df.message
@@ -59,7 +61,7 @@ def load_data(database_filepath):
 
 def tokenize(text):
     """
-    Tokenization function to process the text data
+    Tokenization function to process the text data.
     
     Takes In:
         text: Text message that needs to be tokenized
